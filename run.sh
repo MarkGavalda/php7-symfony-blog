@@ -14,7 +14,8 @@ apt-get install -y \
     libcurl4-openssl-dev \
     libltdl-dev \
     libpng-dev \
-    libpspell-dev
+    libpspell-dev \
+    libreadline-dev
 
 mkdir -p /etc/php7/conf.d
 mkdir -p /etc/php7/{cli,fpm}/conf.d
@@ -83,13 +84,16 @@ make
 make install
 
 # Activate modules
+mkdir -p /etc/php7/conf.d
+mkdir -p /etc/php7/cli/conf.d
+mkdir -p /etc/php7/fpm/conf.d
 API_VERSION=`ls -d /usr/local/php7/lib/php/extensions/no-debug-non-zts-* | xargs basename | cut -d- -f5` 
 echo "zend_extension=/usr/local/php7/lib/php/extensions/no-debug-non-zts-${API_VERSION}/opcache.so" > /etc/php7/conf.d/opcache.ini
 ln -s /etc/php7/conf.d/opcache.ini /etc/php7/cli/conf.d/opcache.ini
 ln -s /etc/php7/conf.d/opcache.ini /etc/php7/fpm/conf.d/opcache.ini
 
 # Install init scripts
-cp -R /vagrant/etc/* /etc
+# cp -R /vagrant/etc/* /etc
 chmod +x /etc/init.d/php7-fpm
 update-rc.d php7-fpm defaults
 service php7-fpm start
