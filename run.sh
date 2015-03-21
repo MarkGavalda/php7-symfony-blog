@@ -22,7 +22,6 @@ mkdir /usr/local/php7
 
 git clone https://github.com/php/php-src.git
 cd php-src
-git reset --hard 960d103d63f3e9e690853b0a07b82195d0f0cfbf
 ./buildconf
 
 CONFIGURE_STRING="--prefix=/usr/local/php7 \
