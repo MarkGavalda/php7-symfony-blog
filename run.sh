@@ -77,8 +77,8 @@ make clean
     --with-config-file-scan-dir=/etc/php7/fpm/conf.d \
     --disable-cli \
     --enable-fpm \
-    --with-fpm-user=vagrant \
-    --with-fpm-group=vagrant
+    --with-fpm-user=www-data \
+    --with-fpm-group=www-data
 
 make
 make install
@@ -93,7 +93,7 @@ ln -s /etc/php7/conf.d/opcache.ini /etc/php7/cli/conf.d/opcache.ini
 ln -s /etc/php7/conf.d/opcache.ini /etc/php7/fpm/conf.d/opcache.ini
 
 # Install init scripts
-# cp -R /vagrant/etc/* /etc
+cp -R ./etc/* /etc
 chmod +x /etc/init.d/php7-fpm
 update-rc.d php7-fpm defaults
 service php7-fpm start
